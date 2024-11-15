@@ -1,0 +1,106 @@
+1.	Таблиця Employees.
+Напишіть запит для вибору імен, прізвищ, окладів усіх працівників та їх id департаменту, 
+оклад яких не перевищує 10000 
+
+SELECT first_name, last_name, salary, department_id 
+FROM employees 
+WHERE salary < 10000 OR salary = 10000;
+
+
+2.	Таблиця Employees.
+Напишіть запит для відображення імен, прізвищ, ідентифікаторів посад та комісійних винагород 
+всіх працівників, які не мають права на отримання комісійної винагороди.
+
+SELECT first_name, last_name, job_id, commission_pct
+FROM employees 
+WHERE commission_PCT IS NULL;
+
+
+3.	Таблиця Employees.
+Напишіть 2 варіанти запиту для відображення списку всіх  імен, прізвищ та їх id департаменту, 
+де імʼя співробітника John.
+
+SELECT first_name, last_name, department_id 
+FROM employees 
+WHERE first_name = 'John';
+
+SELECT first_name, last_name, department_id 
+FROM employees 
+WHERE first_name LIKE 'John';
+
+
+4.	Таблиця Employees.
+Напишіть запит для відображення імен, прізвищ співробітників із ЗП із 80-го департаменту 
+і ЗП менше 10000.
+
+SELECT first_name, last_name, salary, department_id
+FROM employees 
+WHERE department_id = 80 AND salary < 10000;
+
+
+5.	Таблиця Employees.
+Напишіть запит для відображення імен, прізвищ співробітнків із ЗП із 80-го і із 110 департаменту,  
+ЗП яких знаходиться в діапазоні від 10000 до 17000.
+
+SELECT first_name, last_name, salary, department_id
+FROM employees 
+WHERE department_id in (80, 110) 
+AND salary BETWEEN 10000 and 17000;
+
+
+6.	Таблиця Employees.
+Напишіть запит для відображення імен, прізвищ співробітнків із ЗП із 80-го і із 110 департаменту,  
+ЗП яких знаходиться в діапазоні від 10000 до 17000 і які отримують комісію.
+
+SELECT first_name, last_name, salary, department_id
+FROM employees 
+WHERE department_id in (80, 110) 
+AND salary BETWEEN 10000 and 17000
+AND commission_pct is NOT NULL;
+
+
+7.	Таблиця Employees.
+Напишіть запит для відображення списку всіх  імен, прізвищ співробітників, 
+у кого імʼя починається на D та підпорядковується менеджеру 108.
+
+SELECT first_name, last_name
+FROM employees 
+WHERE first_name LIKE 'D%'
+AND manager_id in (108);
+
+
+8.	Таблиця Employees.
+Напишіть запит для відображення всіх даних співробітників, хто підпорядковується 
+менеджерам 100, 108, 124
+
+SELECT *
+FROM employees 
+WHERE manager_id in (100, 108, 124);
+
+
+9.	Таблиця Employees.
+Напишіть запит для відображення всіх даних співробітників, хто не отримує 
+комісію та має ЗП менше 10000 та відсортуйте вибірку за зменшенням ЗП 
+
+SELECT *
+FROM HR.employees 
+WHERE commission_PCT IS NULL
+AND salary < 10000
+ORDER BY salary DESC;
+
+
+10.	Таблиця Employees.
+Напишіть запит для відображення прізвища і імʼя та ЗП, хто не отримує комісію 
+та має ЗП менше 10000 та відсортуйте вибірку за зменшенням ЗП. Прізвище і імʼя відобразіть в одному полі, яке назвіть “List of emplyees for review”.
+Напишіть 2 варіанти запиту використовуючи різні оператори обʼєднання полів.
+
+SELECT first_name ||' '|| last_name AS List_of_emplyees_for_review, salary
+FROM HR.employees 
+WHERE commission_PCT IS NULL AND salary < 10000
+ORDER BY salary DESC;
+
+SELECT CONCAT (first_name, last_name) AS List_of_emplyees_for_review, salary
+FROM HR.employees 
+WHERE commission_PCT IS NULL AND salary < 10000
+ORDER BY salary DESC;
+
